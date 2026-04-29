@@ -6,11 +6,10 @@ import os
 import shutil
 import random
 import time
-import httpx # Added for Groq API
+import httpx
 from pydantic import BaseModel
 from dotenv import load_dotenv
 
-# Load keys from .env file
 load_dotenv()
 
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
@@ -39,7 +38,6 @@ except Exception as e:
     predictor = None
 app = FastAPI(title="Crop Vision App")
 
-# Allows CORS for frontend testing
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -47,10 +45,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Ensure temp directory exists for uploads
 os.makedirs("temp", exist_ok=True)
 
-# Important: Serve static files at the root
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 @app.get("/")
@@ -68,28 +64,24 @@ MOCK_CLASSES = [
 async def predict(file: UploadFile = File(...)):
     file_path = f"temp/{file.filename}"
     
-    # Save uploaded file
     with open(file_path, "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
         
     try:
         if USING_REAL_MODEL:
-            # Use the actual VLM inference
             result = predictor.predict_image(file_path)
             return JSONResponse(content=result)
         else:
-            # Simulator Mode: So we can build the UI before the 3-hour training is done!
-            time.sleep(1.5) # Simulate processing time
+            time.sleep(1.5)
             choice = random.choice(MOCK_CLASSES)
             return JSONResponse(content={
                 "crop": choice["crop"],
                 "disease": choice["disease"],
                 "confidence": f"{random.uniform(85.0, 99.9):.2f}%",
                 "symptoms": choice["symptom"],
-                "visual_explanation": None # Placeholder until GradCAM is active
+                "visual_explanation": None
             })
     finally:
-        # Cleanup
         if os.path.exists(file_path):
             os.remove(file_path)
 
@@ -156,5 +148,4 @@ async def text_to_speech(request: TTSRequest):
 
 if __name__ == "__main__":
     import uvicorn
-    # Runs the server locally on port 8090
     uvicorn.run(app, host="127.0.0.1", port=8090)

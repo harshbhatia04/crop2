@@ -4,28 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CropVision AI</title>
-    <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="static/style.css">
-    <!-- Add jsPDF for report generation -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
     
-    <!-- Background Grid lines -->
     <div class="grid-background"></div>
 
-    <!-- Floating Top Bar -->
     <header class="top-header">
-        <!-- Buttons removed for cleaner dashboard -->
     </header>
 
     <main class="main-container">
         
-        <!-- Hero Section -->
         <div class="brand">
             <h1 class="logo">
                 <span class="logo-box">CROP</span>VISION
@@ -33,10 +27,8 @@
             <p class="tagline"><i>INSTANT DISEASE DETECTION. NO LAB REQUIRED.</i></p>
         </div>
 
-        <!-- Interactive Layout -->
         <div class="app-grid">
             
-            <!-- Left Side: Upload Area (Pink Theme) -->
             <div class="brutal-card card-pink upload-section" id="drop-zone">
                     <div id="upload-placeholder">
                         <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -51,16 +43,13 @@
                     <input type="file" id="file-input" accept="image/*" class="hidden-input">
             </div>
 
-            <!-- Right Side: Results Area (Yellow Theme) -->
             <div class="brutal-card card-yellow result-section disabled" id="result-card">
                 
-                <!-- Loading State -->
                 <div id="loading" class="hidden">
                     <h2 class="animate-bounce">ANALYZING...</h2>
                     <p>Consulting Vision-Language Model</p>
                 </div>
 
-                <!-- Actual Results -->
                 <div id="results" class="hidden">
                     <div class="result-header">
                         <h3>DIAGNOSIS</h3>
@@ -77,7 +66,6 @@
                         <button class="brutal-btn btn-teal" id="open-expert-btn">🤖 GET EXPERT SOLUTION</button>
                     </div>
 
-                    <!-- Expert Solution Modal (Full Screen Overlay) -->
                     <div id="expert-modal" class="modal hidden">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -91,7 +79,7 @@
                                     <select id="lang-select" class="brutal-select">
                                         <option value="English">English</option>
                                         <option value="Hindi">Hindi (हिंदी)</option>
-                                        <option value="Marathi">Marathi (मराठी)</option>
+                                        <option value="Marathi">Marathi (मરાઠી)</option>
                                         <option value="Telugu">Telugu (తెలుగు)</option>
                                         <option value="Tamil">Tamil (தமிழ்)</option>
                                         <option value="Bengali">Bengali (বাংলা)</option>
@@ -145,7 +133,6 @@
                     </div>
                 </div>
 
-                <!-- Idle State -->
                 <div id="idle">
                     <h2>NO DATA YET</h2>
                     <p>Upload a leaf to see results.</p>

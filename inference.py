@@ -14,11 +14,9 @@ class CropDiseaseInference:
     def __init__(self, model_path, symptoms_json, num_classes, device='cuda'):
         self.device = device if torch.cuda.is_available() else "cpu"
         
-        # Simple Vision Model (EfficientNet-B3)
         self.model = models.efficientnet_b3()
         self.model.classifier[1] = nn.Linear(self.model.classifier[1].in_features, num_classes)
         
-        # Load weights
         try:
             self.model.load_state_dict(torch.load(model_path, map_location=self.device))
             print(f"Model loaded successfully from {model_path}")
@@ -37,10 +35,7 @@ class CropDiseaseInference:
             transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
         ])
         
-        # Load class names in alphabetical order (matches ImageFolder)
         self.class_names = sorted(list(self.symptoms_data.keys()))
-        
-        # Target layer for Grad-CAM
         self.target_layers = [self.model.features[-1]]
 
     def predict_image(self, img_path, visual_output="static/gradcam.jpg"):
@@ -61,23 +56,19 @@ class CropDiseaseInference:
         chemical = class_data.get("chemical", "No chemical treatment found.")
         danger = class_data.get("danger", "UNKNOWN")
         
-        # Grad-CAM Visualization
         cam = GradCAM(model=self.model, target_layers=self.target_layers)
         targets = [ClassifierOutputTarget(pred_idx.item())]
         
         grayscale_cam = cam(input_tensor=img_tensor, targets=targets)[0, :]
         
-        # Overlay heatmap (aligned with model input)
         img_for_overlay = cv2.resize(img_orig, (300, 300)) / 255.0
         visualization = show_cam_on_image(img_for_overlay, grayscale_cam, use_rgb=True)
         
-        # Ensure static directory exists
         import os
         os.makedirs(os.path.dirname(visual_output), exist_ok=True)
         cv2.imwrite(visual_output, cv2.cvtColor((visualization * 255).astype(np.uint8), cv2.COLOR_RGB2BGR))
         
         split = class_name.split("_", 1)
-        # Normalize path for web (forward slashes only)
         web_path = f"/{visual_output}".replace('\\', '/')
         
         return {

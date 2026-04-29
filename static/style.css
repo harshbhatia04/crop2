@@ -1,4 +1,3 @@
-/* Neo-Brutalism Design System */
 :root {
     --color-pink: #FF8FB1;
     --color-yellow: #FEE440;
@@ -30,7 +29,6 @@ body {
     overflow-x: hidden;
 }
 
-/* Background Notebook Grid */
 .grid-background {
     position: fixed;
     top: 0;
@@ -44,7 +42,6 @@ body {
     z-index: -1;
 }
 
-/* Header & Nav */
 .top-header {
     width: 100%;
     padding: 10px 40px;
@@ -74,7 +71,6 @@ body {
     border-radius: 9999px;
 }
 
-/* Branding */
 .brand {
     text-align: center;
     margin-top: 10px;
@@ -103,7 +99,6 @@ body {
     margin-top: 10px;
 }
 
-/* Main Layout */
 .app-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -113,7 +108,6 @@ body {
     margin-bottom: 20px;
 }
 
-/* Brutalist Cards */
 .brutal-card {
     border: var(--brutal-border);
     border-radius: 20px;
@@ -132,7 +126,6 @@ body {
     pointer-events: none;
 }
 
-/* Upload Section */
 .upload-section {
     display: flex;
     justify-content: center;
@@ -165,7 +158,6 @@ body {
 
 .hidden-input { display: none; }
 
-/* Buttons */
 .brutal-btn {
     border: var(--brutal-border);
     padding: 15px 30px;
@@ -191,7 +183,6 @@ body {
 .btn-teal { background-color: var(--color-teal); }
 .btn-white { background-color: var(--color-white); }
 
-/* Results Section */
 .result-section {
     min-height: 280px;
     display: flex;
@@ -221,7 +212,6 @@ body {
     100% { transform: translateY(-10px); }
 }
 
-/* Results Content */
 .result-header {
     display: flex;
     justify-content: space-between;
@@ -299,7 +289,6 @@ body {
     text-transform: uppercase;
 }
 
-/* New UI Elements */
 .preview-img {
     max-width: 100%;
     max-height: 220px;
@@ -355,7 +344,6 @@ body {
     font-size: 1rem;
 }
 
-/* Modal Styling */
 .modal {
     position: fixed;
     top: 0;

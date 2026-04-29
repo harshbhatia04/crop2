@@ -6,7 +6,6 @@ const loadingState = document.getElementById('loading');
 const resultsArea = document.getElementById('results');
 const resetBtn = document.getElementById('reset-btn');
 
-// Modal Elements
 const expertModal = document.getElementById('expert-modal');
 const openExpertBtn = document.getElementById('open-expert-btn');
 const closeExpertBtn = document.getElementById('close-expert-btn');
@@ -20,7 +19,6 @@ const refreshAiBtn = document.getElementById('refresh-ai-btn');
 let currentPrediction = null;
 let currentAudio = null;
 
-// Drag and drop mechanics
 dropZone.addEventListener('click', () => fileInput.click());
 
 dropZone.addEventListener('dragover', (e) => {
@@ -89,7 +87,6 @@ function handleUpload(file) {
     });
 }
 
-// Modal Toggle Logic
 openExpertBtn.addEventListener('click', () => {
     expertModal.classList.remove('hidden');
     if (currentPrediction) {
@@ -108,7 +105,6 @@ refreshAiBtn.addEventListener('click', () => {
     }
 });
 
-// Sarvam AI Voice Logic
 listenBtn.addEventListener('click', async () => {
     const text = aiAdviceText.innerText;
     const lang = langSelect.value;
@@ -204,7 +200,6 @@ async function getAiAdvice(crop, disease, language) {
     }
 }
 
-// PDF Generation
 downloadPdfBtn.addEventListener('click', async () => {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
