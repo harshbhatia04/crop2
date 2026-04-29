@@ -18,8 +18,13 @@ class CropDiseaseInference:
         self.model.classifier[1] = nn.Linear(self.model.classifier[1].in_features, num_classes)
         
         try:
-            self.model.load_state_dict(torch.load(model_path, map_location=self.device))
-            print(f"Model loaded successfully from {model_path}")
+            checkpoint = torch.load(model_path, map_location=self.device)
+            if isinstance(checkpoint, dict) and 'state_dict' in checkpoint:
+                self.model.load_state_dict(checkpoint['state_dict'])
+                print(f"Model loaded successfully from {model_path} (Checkpoint format)")
+            else:
+                self.model.load_state_dict(checkpoint)
+                print(f"Model loaded successfully from {model_path}")
         except Exception as e:
             print(f"Warning: Could not load weights: {e}")
             

@@ -31,7 +31,7 @@ try:
     print("Importing inference module... (this may take a minute for PyTorch to load)")
     from inference import CropDiseaseInference
     print("Loading weights into model...")
-    predictor = CropDiseaseInference("best_model_vision.pth", "class_symptoms.json", 17)
+    predictor = CropDiseaseInference("best_model_vision_autosave.pth", "class_symptoms.json", 17)
     print("Model loaded successfully!")
 except Exception as e:
     print(f"Model could not be loaded, using mock only: {e}")
