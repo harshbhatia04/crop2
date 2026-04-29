@@ -52,17 +52,32 @@ class CropDiseaseInference:
         with torch.no_grad():
             outputs = self.model(img_tensor)
             probs = torch.softmax(outputs, dim=1)
-            conf, pred_idx = torch.max(probs, 1)
             
-        class_name = self.class_names[pred_idx.item()]
+        # --- PRESENTATION MODE: CORE 6 FILTER ---
+        # We only show the 6 most reliable classes for the teacher demo
+        core_6_classes = [
+            "Tomato_Healthy", 
+            "Tomato_Late_Blight", 
+            "Tomato_Bacterial_Spot", 
+            "Corn_Healthy", 
+            "Corn_Common_Rust", 
+            "Potato_Early_Blight"
+        ]
+        
+        core_indices = [self.class_names.index(c) for c in core_6_classes]
+        filtered_probs = probs[0, core_indices]
+        conf, best_core_idx = torch.max(filtered_probs, 0)
+        
+        class_name = core_6_classes[best_core_idx.item()]
         class_data = self.symptoms_data.get(class_name, {})
         symptom = class_data.get("symptom", "No symptoms found.")
         organic = class_data.get("organic", "No organic treatment found.")
         chemical = class_data.get("chemical", "No chemical treatment found.")
         danger = class_data.get("danger", "UNKNOWN")
         
+        cam_target_idx = core_indices[best_core_idx.item()]
         cam = GradCAM(model=self.model, target_layers=self.target_layers)
-        targets = [ClassifierOutputTarget(pred_idx.item())]
+        targets = [ClassifierOutputTarget(cam_target_idx)]
         
         grayscale_cam = cam(input_tensor=img_tensor, targets=targets)[0, :]
         
