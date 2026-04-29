@@ -1,0 +1,23 @@
+# Ignore large datasets
+dataset_final/
+dataset/
+dataset_final.zip
+train/
+val/
+test/
+
+# Ignore model weights (too large for GitHub)
+*.pth
+best_model_vision_robust.pth
+best_model_vision_autosave.pth
+
+# Ignore local temp/cache
+temp/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.vscode/
+.env
+
+# Ignore large logs
+*.log

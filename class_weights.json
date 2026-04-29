@@ -1,0 +1,40 @@
+{
+  "classes": [
+    "Corn_Common_Rust",
+    "Corn_Gray_Leaf_Spot",
+    "Corn_Healthy",
+    "Corn_Northern_Leaf_Blight",
+    "Potato_Early_Blight",
+    "Potato_Healthy",
+    "Potato_Late_Blight",
+    "Tomato_Bacterial_Spot",
+    "Tomato_Early_Blight",
+    "Tomato_Healthy",
+    "Tomato_Late_Blight",
+    "Tomato_Leaf_Mold",
+    "Tomato_Mosaic_Virus",
+    "Tomato_Septoria_leaf_spot",
+    "Tomato_Spider_Mites",
+    "Tomato_Target_Spot",
+    "Tomato_Yellow_Leaf_Curl_Virus"
+  ],
+  "weights": [
+    0.6296834523282997,
+    4.3317878875688205,
+    0.6940433632016343,
+    0.9819686668637304,
+    0.98306645184625,
+    6.043662825955124,
+    1.0763193894448844,
+    0.7833879208699069,
+    1.0177696078431373,
+    0.9506518282988872,
+    0.7727178744960198,
+    1.0910086118814772,
+    3.2689700415482177,
+    0.8784744667097608,
+    1.498045896382403,
+    1.7873027259684362,
+    0.41371580389389345
+  ]
+}

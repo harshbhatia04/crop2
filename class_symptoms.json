@@ -1,0 +1,104 @@
+{
+  "Tomato_Bacterial_Spot": {
+    "symptom": "Small, water-soaked spots that turn dark and necrotic. Spots may have a yellow halo and eventually cause leaf drop.",
+    "organic": "Apply copper-based sprays. Remove and destroy infected plant debris.",
+    "chemical": "Use bactericides containing Streptomycin or copper hydroxide.",
+    "danger": "MODERATE"
+  },
+  "Tomato_Early_Blight": {
+    "symptom": "Brown circular spots with concentric rings, often called 'target' spots. Older leaves are affected first.",
+    "organic": "Mulch around plants to prevent soil splash. Prune lower leaves. Use Neem oil.",
+    "chemical": "Apply fungicides containing Chlorothalonil or Mancozeb.",
+    "danger": "MODERATE"
+  },
+  "Tomato_Late_Blight": {
+    "symptom": "Dark irregular wet lesions with rapid spread. In humid conditions, white mold may appear on the underside.",
+    "organic": "Destroy infected plants immediately. Avoid overhead watering. Use copper soap.",
+    "chemical": "High-strength fungicides like Ridomil Gold or Revus are required immediately.",
+    "danger": "CRITICAL"
+  },
+  "Tomato_Leaf_Mold": {
+    "symptom": "Pale green or yellow spots on the upper leaf surface, with olive-green to brown velvety mold on the underside.",
+    "organic": "Increase air circulation. Reduce humidity below 85%. Use baking soda spray.",
+    "chemical": "Apply fungicides like Dithane M-45.",
+    "danger": "LOW"
+  },
+  "Tomato_Septoria_leaf_spot": {
+    "symptom": "Small, circular spots with dark brown margins and tan or gray centers. Black specks may be visible in centers.",
+    "organic": "Keep foliage dry. Remove infected lower leaves. Use compost tea.",
+    "chemical": "Apply Chlorothalonil or copper-based fungicides every 7-10 days.",
+    "danger": "MODERATE"
+  },
+  "Tomato_Spider_Mites": {
+    "symptom": "Yellow or white stippling on leaves. Fine webbing may be visible on the leaf underside.",
+    "organic": "Blast with high-pressure water. Introduce predatory mites. Use Insecticidal soap.",
+    "chemical": "Use miticides like Abamectin or Bifenthrin.",
+    "danger": "HIGH"
+  },
+  "Tomato_Target_Spot": {
+    "symptom": "Small, circular to irregular brown spots with a yellow halo. Spots often develop a target-like appearance.",
+    "organic": "Space plants for airflow. Remove lower leaves. Use copper fungicides.",
+    "chemical": "Apply fungicides containing Azoxystrobin or Pyraclostrobin.",
+    "danger": "MODERATE"
+  },
+  "Tomato_Yellow_Leaf_Curl_Virus": {
+    "symptom": "Stunted growth, yellowing along leaf margins, and characteristic upward leaf curling.",
+    "organic": "Control Whiteflies with yellow sticky traps. Use reflective mulches.",
+    "chemical": "No chemical cure for virus. Use insecticides to kill Whiteflies (vectors).",
+    "danger": "HIGH"
+  },
+  "Tomato_Mosaic_Virus": {
+    "symptom": "Mottling or mosaic patterns of light and dark green on leaves, often with leaf curling.",
+    "organic": "Remove infected plants. Wash hands with milk/soap after handling. Use resistant varieties.",
+    "chemical": "No chemical treatment. Focus on sanitation and controlling aphids.",
+    "danger": "HIGH"
+  },
+  "Tomato_Healthy": {
+    "symptom": "Green leaf with no visible disease, consistent color and smooth texture.",
+    "organic": "Keep doing what you're doing! Use compost for nutrients.",
+    "chemical": "No chemicals needed. Maintain regular fertilization.",
+    "danger": "HEALTHY"
+  },
+  "Potato_Early_Blight": {
+    "symptom": "Target-like dark brown spots with concentric rings. Usually appears on older leaves first.",
+    "organic": "Rotate crops every 3 years. Use mulch. Apply Neem oil early.",
+    "chemical": "Use fungicides containing Chlorothalonil or Mancozeb.",
+    "danger": "MODERATE"
+  },
+  "Potato_Late_Blight": {
+    "symptom": "Large water-soaked dark brown or black spots. White fungal growth may develop on the bottom.",
+    "organic": "Plant resistant varieties. Destroy volunteer potatoes. Use copper sprays.",
+    "chemical": "Apply preventative fungicides like Chlorothalonil before rain.",
+    "danger": "CRITICAL"
+  },
+  "Potato_Healthy": {
+    "symptom": "Healthy green potato leaf with smooth surface and no discoloration.",
+    "organic": "Maintain soil moisture. Use organic fertilizer.",
+    "chemical": "No chemicals needed.",
+    "danger": "HEALTHY"
+  },
+  "Corn_Common_Rust": {
+    "symptom": "Small, reddish-brown pustules on both leaf surfaces. Release dusty spores.",
+    "organic": "Plant resistant hybrids. Early planting. Avoid overhead irrigation.",
+    "chemical": "Apply fungicides like Tilt or Headline if infection starts early.",
+    "danger": "LOW"
+  },
+  "Corn_Northern_Leaf_Blight": {
+    "symptom": "Long, cigar-shaped grayish-green or tan lesions that run parallel to the leaf veins.",
+    "organic": "Tillage to bury infected debris. Crop rotation. Resistant varieties.",
+    "chemical": "Apply fungicides like Quilt or Stratego during silking stage.",
+    "danger": "MODERATE"
+  },
+  "Corn_Gray_Leaf_Spot": {
+    "symptom": "Rectangular, gray-to-tan lesions with straight edges parallel to veins.",
+    "organic": "Increase plant spacing. Rotate with non-host crops (soybeans).",
+    "chemical": "Use fungicides containing Strobilurin or Triazole.",
+    "danger": "MODERATE"
+  },
+  "Corn_Healthy": {
+    "symptom": "Green maize leaf with no visible lesions, spots, or galls.",
+    "organic": "Ensure nitrogen-rich soil.",
+    "chemical": "No treatment required.",
+    "danger": "HEALTHY"
+  }
+}
