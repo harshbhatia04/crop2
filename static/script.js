@@ -61,7 +61,6 @@ function handleUpload(file) {
         currentPrediction = data;
         document.getElementById('res-disease').innerText = data.disease.toUpperCase();
         document.getElementById('res-crop').innerText = `${data.crop} Crop`;
-        document.getElementById('conf-val').innerText = `${data.confidence} MATCH`;
         
         const dangerPill = document.getElementById('danger-val');
         dangerPill.innerText = data.danger_level;
@@ -201,13 +200,44 @@ async function getAiAdvice(crop, disease, language) {
 }
 
 downloadPdfBtn.addEventListener('click', async () => {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
-    const disease = document.getElementById('res-disease').innerText;
-    const aiAdvice = aiAdviceText.innerText;
-    doc.text(`Expert Diagnosis: ${disease}`, 15, 25);
-    doc.text(doc.splitTextToSize(aiAdvice, 180), 15, 40);
-    doc.save(`Expert_Report_${disease}.pdf`);
+    try {
+        const { jsPDF } = window.jspdf || window;
+        const modalBody = document.querySelector('.modal-content');
+        const footer = document.querySelector('.modal-footer');
+        const closeBtn = document.querySelector('.close-btn');
+        const langSelector = document.querySelector('.language-selector');
+
+        // Hide elements we don't want in the PDF
+        footer.style.display = 'none';
+        closeBtn.style.display = 'none';
+        langSelector.style.display = 'none';
+
+        const canvas = await html2canvas(modalBody, {
+            scale: 2,
+            useCORS: true,
+            backgroundColor: "#ffffff"
+        });
+
+        // Restore elements
+        footer.style.display = 'flex';
+        closeBtn.style.display = 'block';
+        langSelector.style.display = 'flex';
+
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF('p', 'mm', 'a4');
+        const imgProps = pdf.getImageProperties(imgData);
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+        pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+        
+        const disease = document.getElementById('res-disease').innerText;
+        const safeName = disease.replace(/[^a-z0-9]/gi, '_').toLowerCase();
+        pdf.save(`CropVision_Report_${safeName}.pdf`);
+    } catch (err) {
+        console.error("PDF Export Error:", err);
+        alert("Failed to generate PDF. Please try again.");
+    }
 });
 
 resetBtn.addEventListener('click', () => {

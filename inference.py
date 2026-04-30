@@ -21,7 +21,7 @@ class CropDiseaseInference:
             checkpoint = torch.load(model_path, map_location=self.device)
             if isinstance(checkpoint, dict) and 'state_dict' in checkpoint:
                 self.model.load_state_dict(checkpoint['state_dict'])
-                print(f"Model loaded successfully from {model_path} (Checkpoint format)")
+                print(f"Model loaded successfully from {model_path}")
             else:
                 self.model.load_state_dict(checkpoint)
                 print(f"Model loaded successfully from {model_path}")
@@ -47,37 +47,38 @@ class CropDiseaseInference:
         img_orig = cv2.imread(img_path)
         img_orig = cv2.cvtColor(img_orig, cv2.COLOR_BGR2RGB)
         img_pil = Image.fromarray(img_orig)
-        img_tensor = self.transform(img_pil).unsqueeze(0).to(self.device)
         
-        with torch.no_grad():
-            outputs = self.model(img_tensor)
-            probs = torch.softmax(outputs, dim=1)
-            
-        # --- PRESENTATION MODE: CORE 6 FILTER ---
-        # We only show the 6 most reliable classes for the teacher demo
-        core_6_classes = [
-            "Tomato_Healthy", 
-            "Tomato_Late_Blight", 
-            "Tomato_Bacterial_Spot", 
-            "Corn_Healthy", 
-            "Corn_Common_Rust", 
-            "Potato_Early_Blight"
+        tta_transforms = [
+            lambda x: x,
+            lambda x: transforms.functional.hflip(x),
+            lambda x: transforms.functional.vflip(x),
+            lambda x: transforms.functional.rotate(x, 15),
+            lambda x: transforms.functional.rotate(x, -15)
         ]
         
-        core_indices = [self.class_names.index(c) for c in core_6_classes]
-        filtered_probs = probs[0, core_indices]
-        conf, best_core_idx = torch.max(filtered_probs, 0)
+        all_probs = []
+        with torch.no_grad():
+            for t in tta_transforms:
+                augmented_img = t(img_pil)
+                img_tensor = self.transform(augmented_img).unsqueeze(0).to(self.device)
+                outputs = self.model(img_tensor)
+                probs = torch.softmax(outputs, dim=1)
+                all_probs.append(probs)
         
-        class_name = core_6_classes[best_core_idx.item()]
+        avg_probs = torch.mean(torch.stack(all_probs), dim=0)
+        probs = avg_probs
+        
+        conf, pred_idx = torch.max(probs, 1)
+        class_name = self.class_names[pred_idx.item()]
+        
         class_data = self.symptoms_data.get(class_name, {})
         symptom = class_data.get("symptom", "No symptoms found.")
         organic = class_data.get("organic", "No organic treatment found.")
         chemical = class_data.get("chemical", "No chemical treatment found.")
         danger = class_data.get("danger", "UNKNOWN")
         
-        cam_target_idx = core_indices[best_core_idx.item()]
         cam = GradCAM(model=self.model, target_layers=self.target_layers)
-        targets = [ClassifierOutputTarget(cam_target_idx)]
+        targets = [ClassifierOutputTarget(pred_idx.item())]
         
         grayscale_cam = cam(input_tensor=img_tensor, targets=targets)[0, :]
         
